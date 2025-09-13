@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,700&display=swap');
+@import "tailwindcss";
+* {
+  font-family: "Poppins", sans-serif !important;
+}
+
+/* Style the checkbox container */
+
+.box {
+  cursor: pointer;
+}
+
+.box input {
+  display: none;
+}
+
+.box svg {
+  overflow: visible;
+}
+
+.path {
+  fill: none;
+  stroke: #6C63FF;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+  stroke-dasharray: 241 9999999;
+  stroke-dashoffset: 0;
+}
+
+.box input:checked ~ svg .path {
+  stroke-dasharray: 70.5096664428711 9999999;
+  stroke-dashoffset: -262.2723388671875;
+}
+.text {
+  position: relative;
+}
+.text::after {
+  content: '';
+  position: absolute;
+  background: #333333bc;
+  width: 0;
+  height: 3px;
+  top: 50%;
+  left: 0;
+  transition: all .4s;
+}
+.text.completed:after {
+  width: 100%;
+}
