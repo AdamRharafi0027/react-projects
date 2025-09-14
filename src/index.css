@@ -5,7 +5,9 @@
 }
 
 /* Style the checkbox container */
-
+body {
+  background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+}
 .box {
   cursor: pointer;
 }
