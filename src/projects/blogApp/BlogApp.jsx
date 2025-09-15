@@ -3,7 +3,8 @@ import bgImage from "../../../public/images/bg.jpg";
 
 const BlogApp = () => {
   const [posts, setPosts] = useState([]);
-  const [visible, setVisible] = useState(6); // عدد المقالات التي ستظهر في البداية
+  const [visible, setVisible] = useState(6); 
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -11,16 +12,31 @@ const BlogApp = () => {
       .then((json) => setPosts(json));
   }, []);
 
+  const filtredSearch = posts.filter(post=>
+    post.title.toLowerCase().includes(search.toLowerCase())
+  )
+
   const loadMore = () => {
-    setVisible((prev) => prev + 6); // كل ضغطة زر تزود 6
+    setVisible((prev) => prev + 6);
   };
+  const handleClear = () => {
+    setSearch("")
+  }
 
   return (
     <>
       <section className="flex flex-col w-full min-h-screen text-white py-10 px-5 md:px-20">
         {/* HEADER */}
-        <header>
+        <header className="z-20 flex items-center justify-around ">
           <h1 className="text-5xl font-bold cursor-pointer">BLOGGER</h1>
+          <div className="flex  gap-5">
+            <input type="text" placeholder="Search..." 
+            value={search}
+            onChange={(e)=>{setSearch(e.target.value)}}
+            className="bg-white rounded-full p-3 outline placeholder:text-gray-500 w-100 px-10 border-1 text-gray-800 focus:outline-none focus:ring-2 focus:ring-white/40 "
+          />
+          <button onClick={handleClear} className="cursor-pointer px-4 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition duration-300">clear</button>
+          </div>
         </header>
 
         {/* HERO */}
@@ -47,7 +63,7 @@ const BlogApp = () => {
         <div className="w-full my-20 z-10 pb-10 bg-purple-500 py-20 rounded-2xl">
           <div className="cards flex flex-wrap items-start justify-center gap-10 px-5 md:px-20">
             {posts.length > 0 &&
-              posts.slice(0, visible).map((post, index) => {
+              filtredSearch.slice(0, visible).map((post, index) => {
                 return (
                   <div
                     key={index}
