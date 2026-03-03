@@ -3,7 +3,13 @@ import FilterProducts from "./projects/filterProducts/FilterProducts"
 import MySearchExample from "./projects/search/MySearchExample"
 import Todo from "./projects/todoApp/Todo"
 import WeatherApp from "./projects/weatherApp/WeatherApp"
+import UserContext from "./projects/LearnContext/Context"
+import Profile from "./projects/LearnContext/Profile"
 
+const User = {
+  name: "Adam",
+  age: 30,
+}
 
 const App = () => {
   return (
@@ -12,7 +18,10 @@ const App = () => {
       {/* <WeatherApp /> */}
       {/* <MySearchExample /> */}
       {/* <BlogApp /> */}
-      <FilterProducts />
+      {/* <FilterProducts /> */}
+      <UserContext.Provider value={User}>
+<Profile />
+      </UserContext.Provider>
     </>
   )
 }
